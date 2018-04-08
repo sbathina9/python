@@ -13,6 +13,7 @@ class BinarySearchTree(object):
 	def insertNode(self, node_to_insert):
 		if node_to_insert is None:
 			return
+
 		if self.rootNode is None:
 			self.rootNode = node_to_insert
 		else:
@@ -36,18 +37,38 @@ class BinarySearchTree(object):
 					rootNode.rightchild = node_to_insert
 	def traverse_bst(self, type="inorder"):
 		mylist =[]
-		if type is "inorder":
+		if type is "postorder":
+		  self.postorder_traversal(self.rootNode, 0, mylist)
+		elif type is "preorder":
+		  self.preorder_traversal(self.rootNode,0,mylist)
+		else:
 		  self.inorder_traversal(self.rootNode, 0, mylist)
-		mylist.sort(key=lambda tup: tup[1])
+		#mylist.sort(key=lambda tup: tup[1])
 		print mylist
 
+	"""Traverse the left node, root node, right node"""
 	def inorder_traversal(self,rootNode, level, mylist):
 		if rootNode is not None:
 			level=level+1
 			self.inorder_traversal(rootNode.leftchild, level, mylist)
-			print "%s %s" % (rootNode.data, level); 
 			mylist.append( (rootNode.data, level) )
 			self.inorder_traversal(rootNode.rightchild, level, mylist)
+
+	"""Traverse the root node, left node, right node"""
+	def preorder_traversal(self,rootNode, level, mylist):
+		if rootNode is not None:
+			level=level+1
+			mylist.append( (rootNode.data, level) )
+			self.preorder_traversal(rootNode.leftchild, level, mylist)
+			self.preorder_traversal(rootNode.rightchild, level, mylist)
+	
+	"""Traverse the left node, right node, root node"""
+	def postorder_traversal(self,rootNode, level, mylist):
+		if rootNode is not None:
+			level=level+1
+			mylist.append( (rootNode.data, level) )
+			self.postorder_traversal(rootNode.rightchild, level, mylist)
+			self.postorder_traversal(rootNode.leftchild, level, mylist)
 
 	def max_value(self):
 		if self.rootNode is not None:
@@ -85,6 +106,8 @@ bst.insertNode(t6)
 bst.insertNode(t7)
 
 bst.traverse_bst()
+bst.traverse_bst(type="preorder")
+bst.traverse_bst(type="postorder")
 bst.max_value()		
 bst.min_value()
 
