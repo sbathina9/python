@@ -52,6 +52,7 @@ class BinarySearchTree(object):
 			level=level+1
 			self.inorder_traversal(rootNode.leftchild, level, mylist)
 			mylist.append( (rootNode.data, level) )
+			#print "%s,%s" % (rootNode.data, level)
 			self.inorder_traversal(rootNode.rightchild, level, mylist)
 
 	"""Traverse the root node, left node, right node"""
@@ -66,9 +67,25 @@ class BinarySearchTree(object):
 	def postorder_traversal(self,rootNode, level, mylist):
 		if rootNode is not None:
 			level=level+1
-			mylist.append( (rootNode.data, level) )
 			self.postorder_traversal(rootNode.rightchild, level, mylist)
 			self.postorder_traversal(rootNode.leftchild, level, mylist)
+			mylist.append( (rootNode.data, level) )
+
+	def BFS(self):
+		queue = []
+		collect_contents = []
+		if self.rootNode is None:
+			return None
+		else:
+			queue.append(self.rootNode)
+			while len(queue) > 0:
+				mynode = queue.pop(0)
+				collect_contents.append(mynode.data)
+				if mynode.leftchild is not None:
+					queue.append(mynode.leftchild)	
+				if mynode.rightchild is not None:
+					queue.append(mynode.rightchild)
+		print ','.join( str(x) for x in collect_contents)
 
 	def max_value(self):
 		if self.rootNode is not None:
@@ -108,6 +125,8 @@ bst.insertNode(t7)
 bst.traverse_bst()
 bst.traverse_bst(type="preorder")
 bst.traverse_bst(type="postorder")
+bst.BFS()
+
 bst.max_value()		
 bst.min_value()
 
