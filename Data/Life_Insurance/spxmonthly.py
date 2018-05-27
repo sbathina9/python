@@ -61,12 +61,12 @@ for index, item in enumerate(range_list):
     month_dict[month_list[index]]= [round(spx_total/len(item),2), round(cap_total/len(item),2),round(spread_total/len(item),2)]
 
 print("Sorting by SPX")
-for key, value in sorted(month_dict.items(), key=lambda x: x[1][0]):
+for key, value in sorted(month_dict.items(), key=lambda x: x[1][0], reverse=True):
     print (key, value)
 print("Sorting by Penn 11 cap")
-for key, value in sorted(month_dict.items(), key=lambda x: x[1][1]):
+for key, value in sorted(month_dict.items(), key=lambda x: x[1][1], reverse=True):
     print (key, value)
 print("Sorting by Pen spread")
-for key, value in sorted(month_dict.items(), key=lambda x: x[1][2]):
+for key, value in sorted(month_dict.items(), key=lambda x: x[1][2], reverse=True):
     print (key, value)
 
