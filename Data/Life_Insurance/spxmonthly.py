@@ -1,6 +1,12 @@
 import csv
+import sys
 
-with open("spx-monthly.csv","rb") as f:
+if len(sys.argv) == 2:
+    file_name = sys.argv[1]
+else:
+    file_name = "spx-monthly.csv"
+
+with open(file_name,"rb") as f:
     reader = csv.reader(f)
     mylist  = list(reader)
 
