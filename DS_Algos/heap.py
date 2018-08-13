@@ -37,20 +37,17 @@ class Heap(object):
 	    parent =self.parent(parent)
 
     def heappop(self, max = False):
-
         if self.size <= 0:
 	    return None
 
 	top = self.heap[0]
 	self.heap[0], self.heap[self.size - 1] = self.heap[self.size - 1], self.heap[0]
 	self.size = self.size - 1
-
 	index = 0
 
 	while(index < self.size):
 	    left_child =  2*index + 1
 	    right_child = 2*index + 2
-
 
 	    if left_child < self.size:
 		childToSwap = None
@@ -68,7 +65,6 @@ class Heap(object):
 			    childToSwap = left_child
 			else:
 			    childToSwap = right_child
-
 		if max is False:										
 		    if self.heap[index] > self.heap[childToSwap]:
 			self.heap[index], self.heap[childToSwap] = self.heap[childToSwap], self.heap[index]
@@ -79,7 +75,6 @@ class Heap(object):
 			self.heap[index], self.heap[childToSwap] = self.heap[childToSwap], self.heap[index]
 		    else:
 			break
-
 		index = childToSwap
 	    else:
 	        break
@@ -90,11 +85,8 @@ class Heap(object):
 	    print(self.heap[index], index)
 
 h = Heap()
-
-
 for i in range(1,101):
     h.heappush(randint(0,1000), max = True)
 h.heapprint()
-
 for i in range(1,102):
     print ("Heap pop value ", h.heappop(max = True))
