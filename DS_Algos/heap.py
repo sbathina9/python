@@ -3,7 +3,7 @@ from random import randint
 class Heap(object):
     def __init__(self):
         self.size = 0
-	self.heap = []
+        self.heap = []
 
     def parent(self, index):
 	if index % 2 == 0:
